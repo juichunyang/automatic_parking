@@ -10,8 +10,6 @@ This automatic_parking package can be divied into two parts, pattern recognition
 Creat a new work space
 ```
 mkdir -p docking_ws/src
-```
-```
 cd docking_ws/src
 ```
 Clone the Laser Line Extraction package.
@@ -21,8 +19,6 @@ git clone https://github.com/CuteJui/automatic_parking.git
 Clone the Laser Line Extraction package.
 ```
 git clone https://github.com/kam3k/laser_line_extraction
-```
-```
 cd ..
 ```
 Build the package.
