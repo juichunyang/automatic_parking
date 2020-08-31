@@ -43,9 +43,9 @@ roslaunch auto_dock auto_dock.launch
 
 ## Parameters
 ### Pattern Angle Definition
-<img src="https://github.com/CuteJui/automatic_parking/blob/master/readme_resource/pattern_angle.png" width="667" height="415"/>
+<img src="https://github.com/CuteJui/automatic_parking/blob/master/readme_resource/pattern_angle.png" width="467" height="290"/>
 ### Pattern Parameters Definition
-<img src="https://github.com/CuteJui/automatic_parking/blob/master/readme_resource/pattern_parameters.png" width="871" height="541"/>
+<img src="https://github.com/CuteJui/automatic_parking/blob/master/readme_resource/pattern_parameters.png" width="435" height="270"/>
 - `pattern_angle1` (default: 4.21)
 	- Theta 1 as shown in pattern angle definition. Note that the unit is radian.
 - `pattern_angle2` (default: 1.57)
@@ -81,7 +81,7 @@ roslaunch auto_dock auto_dock.launch
 There are models of dock for Gazebo simulation in "Model" file.
 ### Dock 1
 The size of dock 1 is shown as the picture below.
-<img src="https://github.com/CuteJui/automatic_parking/blob/master/readme_resource/dock_1.png" width="598" height="313"/>
+<img src="https://github.com/CuteJui/automatic_parking/blob/master/readme_resource/dock_1.png" width="418" height="219"/>
 ### Dock 2
 The size of dock 2 is shown as the picture below.
-<img src="https://github.com/CuteJui/automatic_parking/blob/master/readme_resource/dock_2.png" width="658" height="340"/>
+<img src="https://github.com/CuteJui/automatic_parking/blob/master/readme_resource/dock_2.png" width="460" height="238"/>
