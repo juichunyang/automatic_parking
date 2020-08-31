@@ -1,6 +1,7 @@
 # automatic_parking
 This automatic_parking package can be divied into two parts, pattern recognition and moving to goal. In pattern recogintion, this package depends on laser_line extraction package to turn laser point clouds into line segments. Then, this package will go through these line segments to find the designed pattern and broadcast a frame, dock frame. After the frame being populated, the robot will move to the dock and the strategy is shown as the gif below. The ROS version is Melodic.
-![](readme_resource/docking_demo.gif)
+<img src="https://github.com/CuteJui/automatic_parking/master/readme_resource/docking_demo.gif">
+
 
 ## Dependency
 - [`Laser Line Extraction`](https://github.com/kam3k/laser_line_extraction)
@@ -42,9 +43,9 @@ roslaunch auto_dock auto_dock.launch
 
 ## Parameters
 ### Pattern Angle Definition
-![](readme_resource/pattern_angle.png)
+<img src="https://github.com/CuteJui/automatic_parking/master/readme_resource/pattern_angle.png" width="667" height="415">
 ### Pattern Parameters Definition
-![](readme_resource/pattern_parameters.png)
+<img src="https://github.com/CuteJui/automatic_parking/master/readme_resource/pattern_parameters.png" width="871" height="541">
 - `pattern_angle1` (default: 4.21)
 	- Theta 1 as shown in pattern angle definition. Note that the unit is radian.
 - `pattern_angle2` (default: 1.57)
@@ -80,8 +81,7 @@ roslaunch auto_dock auto_dock.launch
 There are models of dock for Gazebo simulation in "Model" file.
 ### Dock 1
 The size of dock 1 is shown as the picture below.
-![](readme_resource/dock_1.png)
+<img src="https://github.com/CuteJui/automatic_parking/master/readme_resource/dock_1.png" width="598" height="313">
 ### Dock 2
 The size of dock 2 is shown as the picture below.
-![](readme_resource/dock_2.png)
-
+<img src="https://github.com/CuteJui/automatic_parking/master/readme_resource/dock_2.png" width="658" height="340">
