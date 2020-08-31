@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>auto_dock</name>
+  <version>1.0.0</version>
+  <description>The auto_dock package</description>
+  <maintainer email="rachelyoung0407@gmail.com">Jui-Chun Yang</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>laser_line_extraction</build_depend>
+  <build_export_depend>laser_line_extraction</build_export_depend>
+  <exec_depend>laser_line_extraction</exec_depend>
+  <build_depend>visualization_msgs</build_depend>
+  <build_export_depend>visualization_msgs</build_export_depend>
+  <exec_depend>visualization_msgs</exec_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_export_depend>geometry_msgs</build_export_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>tf</exec_depend>
+
+</package>

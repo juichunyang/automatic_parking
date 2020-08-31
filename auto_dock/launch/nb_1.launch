@@ -1,0 +1,39 @@
+<launch>
+  <node name="line_extractor" pkg="laser_line_extraction" type="line_extraction_node">
+    <param name="~frequency" value="10.0" />
+    <param name="~frame_id" value="base_laser" />
+    <param name="~scan_topic" value="scan" />
+    <param name="~publish_markers" value="true" />
+    <param name="~bearing_std_dev" value="0.001" />
+    <param name="~range_std_dev" value="0.02" />
+    <param name="~least_sq_angle_thresh" value="0.0001" />
+    <param name="~least_sq_radius_thresh" value="0.0001" />
+    <param name="~max_line_gap" value="0.4" />
+    <param name="~min_line_length" value="0.05" />
+    <param name="~min_range" value="0.1" />
+    <param name="~min_split_dist" value="0.01" />
+    <param name="~outlier_dist" value="0.05" />
+    <param name="~min_line_points" value="5" />
+  </node>
+
+  <node pkg="auto_dock" type="pattern" name="pattern_node" output="screen">
+  <param name="pattern_angle1" value="3.927" />
+  <param name="pattern_angle2" value="1.57" />
+  <param name="pattern_angle3" value="3.927" />
+  <param name="detect_angle_tolerance" value="0.1" />
+  <param name="group_dist_tolerance" value="0.1" />
+  <param name="laser_frame_id" value="base_laser" />
+  </node>
+
+  <node pkg="auto_dock" type="controller" name="controller_node" output="screen">
+  <param name="base_frame_id" value="base_link" />
+  <param name="min_v" value="0.2" />
+  <param name="min_w" value="0.1" />
+  <param name="max_v" value="0.3" />
+  <param name="max_w" value="0.3" />
+  <param name="threshold_v" value="0.3" />
+  <param name="threshold_w" value="0.4" />
+  <param name="dist_to_dock" value="0.2" />
+  <param name="dist_to_center" value="0.03" />
+  </node>
+</launch>
