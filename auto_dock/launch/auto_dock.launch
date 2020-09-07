@@ -17,9 +17,9 @@
   </node>
 
   <node pkg="auto_dock" type="pattern" name="pattern_node" output="screen">
-  <param name="pattern_angle1" value="3.927" />
-  <param name="pattern_angle2" value="1.57" />
-  <param name="pattern_angle3" value="3.927" />
+  <param name="pattern_angle1" value="3.81" />
+  <param name="pattern_angle2" value="1.8" />
+  <param name="pattern_angle3" value="3.81" />
   <param name="detect_angle_tolerance" value="0.1" />
   <param name="group_dist_tolerance" value="0.1" />
   <param name="laser_frame_id" value="laser_frame" />

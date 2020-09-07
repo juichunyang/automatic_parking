@@ -238,9 +238,9 @@ int main(int argc, char** argv){
     ros::NodeHandle nh_;
 
     // Load Parameters
-    nh_.param<double>("pattern_angle1",pattern_angle1, M_PI_4*5);
-    nh_.param<double>("pattern_angle2",pattern_angle2, M_PI_2);
-    nh_.param<double>("pattern_angle3",pattern_angle3, M_PI_4*5);
+    nh_.param<double>("pattern_angle1",pattern_angle1, 3.81);
+    nh_.param<double>("pattern_angle2",pattern_angle2, 1.8);
+    nh_.param<double>("pattern_angle3",pattern_angle3, 3.81);
     nh_.param<double>("detect_angle_tolerance",detect_angle_tolerance, 0.1);
     nh_.param<double>("group_dist_tolerance",group_dist_tolerance, 0.1);
     nh_.param<std::string>("laser_frame_id",laser_frame_id, "laser_frame");
