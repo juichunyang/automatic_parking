@@ -12,7 +12,7 @@ Creat a new work space
 mkdir -p docking_ws/src
 cd docking_ws/src
 ```
-Clone the Laser Line Extraction package.
+Clone the automatic parking package.
 ```
 git clone https://github.com/CuteJui/automatic_parking.git
 ```
