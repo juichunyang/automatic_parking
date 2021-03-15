@@ -28,14 +28,10 @@ double p[6];
 
 bool calAngle(double a, double b, double angle_ab, double detect_angle_tolerance){
     double angle;
-    if ((a*b) > 0){ 
-        angle = fabs(a-b);
-    }
+    if ((a*b) > 0) angle = fabs(a-b);
     else angle = 2* M_PI-fabs(a-b);
-    //printf("angle=%f\n", angle);
-    if (fabs(angle_ab-angle)<=detect_angle_tolerance){
-        //printf("angle=%f\n", angle);
-        return true;}
+    
+    if (fabs(angle_ab-angle)<=detect_angle_tolerance) return true;
     else return false;
 }
 
@@ -69,15 +65,13 @@ void populateTF(double x, double y, double theta, std::string name){
     q.setRPY(0,0,theta);
     transform.setRotation(q);
     br.sendTransform(tf::StampedTransform(transform,ros::Time::now(),laser_frame_id,name));
-    //br.sendTransform(tf::StampedTransform(transform,ros::Time::now(),"base_laser",name));
-
 }
 
 void findXY(float xa, float ya, float theta_a, float xb, float yb, float theta_b, int i){
     double ka = ya - tan(theta_a)*xa;
     double kb = yb - tan(theta_b)*xb;
-    p[2*i-2] = xa;//(-ka+kb)/(tan(theta_a)-tan(theta_b));
-    p[2*i-1] = ya;//tan(theta_a)*x+ka;
+    p[2*i-2] = xa;   //(-ka+kb)/(tan(theta_a)-tan(theta_b));
+    p[2*i-1] = ya;   //tan(theta_a)*x+ka;
 }
 
 void updateVectors(){
@@ -100,8 +94,6 @@ void patternCallback(const laser_line_extraction::LineSegmentList::ConstPtr& msg
     bool check_angle3 = false;
 
     fprintf(stderr, "Number of line = %d\n", lineNum);
-    //printf("%d\n", lineNum);
-    //printf("%f\n", vectors[0].radius);
 
     // Check whether topic line_segments is publishing
     if (lineNum < 4){
@@ -114,13 +106,8 @@ void patternCallback(const laser_line_extraction::LineSegmentList::ConstPtr& msg
         ROS_INFO("Searching Pattern......");
         for(int i=0; i<lineNum; i++){
             for (int j=i+1; j<lineNum; j++){
-                //printf("(%d,%d)\n",i,j);
+                
                 if (calAngle(vectors[i].angle,vectors[j].angle, 3.14-pattern_angle2, detect_angle_tolerance)){
-                    //printf("vector1:start(%f,%f)\n",vectors[i].start[0],vectors[i].start[1]);
-                    //printf("vector1:end(%f,%f)\n",vectors[i].end[0],vectors[i].end[1]);
-                    //printf("vector2:start(%f,%f)\n",vectors[j].start[0],vectors[j].start[1]);
-                    //printf("vector2:end(%f,%f)\n",vectors[j].end[0],vectors[j].end[1]);
-                    //printf("(%d,%d)\n",i,j);
                 
                     // Label vector_b and vector_c
                     double dist_x1 = fabs(vectors[i].start[0] - vectors[j].end[0]);
@@ -129,15 +116,13 @@ void patternCallback(const laser_line_extraction::LineSegmentList::ConstPtr& msg
                     double dist_x2 = fabs(vectors[j].start[0] - vectors[i].end[0]);
                     double dist_y2 = fabs(vectors[j].start[1] - vectors[i].end[1]);
                     double dist_2 = sqrt(pow(fabs(vectors[j].start[0] - vectors[i].end[0]),2)+pow(fabs(vectors[j].start[1] - vectors[i].end[1]),2));
-                    //printf("test %d\n",check_angle2);
-                    //if ((dist_x1 < group_dist_tolerance) && (dist_y1 < group_dist_tolerance)){
+                    
                     if (dist_1 <= group_dist_tolerance){
                         v_b_t = i;
                         v_c_t = j;
                         check_angle2 = true;
                         printf("find b:%d, find c:%d\n",v_b_t,v_c_t);
-                    }
-                    //else if ((dist_x2 < group_dist_tolerance) && (dist_y2 < group_dist_tolerance)){
+                    } 
                     else if (dist_2 <= group_dist_tolerance){
                         v_b_t = j;
                         v_c_t = i;
@@ -147,25 +132,20 @@ void patternCallback(const laser_line_extraction::LineSegmentList::ConstPtr& msg
                 }
             }
         }
-    
-        //printf("b start(%f,%f). vb = %d\n",vectors[v_b_t].start[0],vectors[v_b_t].start[1], v_b_t);
-        //rintf("c end(%f,%f). vc = %d\n",vectors[v_c_t].end[0],vectors[v_c_t].end[1],v_c_t);
     }
 
     // Find vector a
     if (check_angle2){
-        //printf("%d\n",check_angle2);
         for (int i=0; i<lineNum; i++){
             double dist_x = fabs(vectors[i].start[0] - vectors[v_b_t].end[0]);
             double dist_y = fabs(vectors[i].start[1] - vectors[v_b_t].end[1]);
             double dist_= sqrt(pow(fabs(vectors[i].start[0] - vectors[v_b_t].end[0]),2)+pow(fabs(vectors[i].start[1] - vectors[v_b_t].end[1]),2));
-            //if ((dist_x <= group_dist_tolerance) && (dist_y <= group_dist_tolerance)){
+            
             if (dist_ <= group_dist_tolerance){
                 if (calAngle(vectors[i].angle,vectors[v_b_t].angle, pattern_angle1-3.14, detect_angle_tolerance)){
                     v_a_t = i;
                     check_angle1 = true;
                     printf("find a = %d\n",v_a_t);
-                    //printf("a start(%f,%f). va = %d\n",vectors[v_a].start[0],vectors[v_a].start[1], v_a);
                 }
             
             }
@@ -179,7 +159,7 @@ void patternCallback(const laser_line_extraction::LineSegmentList::ConstPtr& msg
             double dist_x = fabs(vectors[v_c_t].start[0] - vectors[i].end[0]);
             double dist_y = fabs(vectors[v_c_t].start[1] - vectors[i].end[1]);
             double dist_= sqrt(pow(fabs(vectors[v_c_t].start[0] - vectors[i].end[0]),2)+pow(fabs(vectors[v_c_t].start[1] - vectors[i].end[1]),2));
-            //if ((dist_x <= group_dist_tolerance) && (dist_y <= group_dist_tolerance)){
+            
             if (dist_ <= group_dist_tolerance){
                 if (calAngle(vectors[i].angle,vectors[v_c_t].angle, pattern_angle1-3.14, detect_angle_tolerance)){
                     v_d_t = i;
@@ -190,8 +170,7 @@ void patternCallback(const laser_line_extraction::LineSegmentList::ConstPtr& msg
                     updateVectors();
                     findXY(vectors[v_a].start[0],vectors[v_a].start[1],vectors[v_a].angle,vectors[v_b].start[0],vectors[v_b].start[1],vectors[v_b].angle,1);
                     findXY(vectors[v_b].start[0],vectors[v_b].start[1],vectors[v_b].angle,vectors[v_c].start[0],vectors[v_c].start[1],vectors[v_c].angle,2);
-                    findXY(vectors[v_c].start[0],vectors[v_c].start[1],vectors[v_c].angle,vectors[v_d].start[0],vectors[v_d].start[1],vectors[v_d].angle,3);
-                    //printf("d start(%f,%f) end(%f,%f) angle %f\n",vectors[v_d].start[0],vectors[v_d].start[1],vectors[v_d].end[0],vectors[v_d].end[1], v_d);
+                    findXY(vectors[v_c].start[0],vectors[v_c].start[1],vectors[v_c].angle,vectors[v_d].start[0],vectors[v_d].start[1],vectors[v_d].angle,3); 
                 }
             }
         }
@@ -207,7 +186,7 @@ void patternCallback(const laser_line_extraction::LineSegmentList::ConstPtr& msg
         double x = (p[0]+p[4])/2;
         double y = (p[1]+p[5])/2;
         double theta = atan2((y-p[3]),(x-p[2]));
-        //printf("origin(%f,%f)", x, y);
+        
         // populate dock origin marker
         populateMarkerMsg(x,y);
         // populate dock_frame
@@ -224,17 +203,12 @@ void patternCallback(const laser_line_extraction::LineSegmentList::ConstPtr& msg
         else {
             lr_msg.data = false;
         }
-        //p_msg.data = true;
-
     }
-    
-
 }
 
 
 int main(int argc, char** argv){
     ros::init(argc, argv, "pattern_node");
-    //ROS_INFO("Start Pattern Recognition");
     ros::NodeHandle nh_;
 
     // Load Parameters
@@ -258,14 +232,11 @@ int main(int argc, char** argv){
     ros::Publisher marker_pub_ =nh_.advertise<visualization_msgs::Marker>("origin_markers",1);
     ros::Publisher lr_pub_ =nh_.advertise<std_msgs::Bool>("l_or_r",100);
 
-    //ros::Publisher p_pub_ =nh_.advertise<std_msgs::Bool>("find_pattern",100);
-
     ros::Rate rate(20.0);
 
     while(ros::ok()){
         marker_pub_.publish(points_msg);
         lr_pub_.publish(lr_msg);
-        //p_pub_.publish(p_msg);
 
         ros::spinOnce();
         rate.sleep();
