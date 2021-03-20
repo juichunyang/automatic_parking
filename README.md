@@ -1,4 +1,4 @@
-# automatic_parking
+# Automatic Parking
 This automatic_parking package can be divied into two parts, pattern recognition and moving to goal. In pattern recogintion, this package depends on laser_line extraction package to turn laser point clouds into line segments. Then, this package will go through these line segments to find the designed pattern and broadcast a frame, dock frame. After the frame being populated, the robot will move to the dock and the strategy is shown as the gif below. The ROS version is Melodic.
 <img src="https://github.com/CuteJui/automatic_parking/blob/master/readme_resource/docking_demo.gif"/>
 
